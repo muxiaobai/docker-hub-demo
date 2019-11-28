@@ -1,6 +1,6 @@
 #systemctl  start  docker  
-mkdir -p /docker/nginx  
-vim Dockerfile  
+#mkdir -p /docker/nginx  
+#vim Dockerfile  
 #images of nginx  
 FROM docker.io/centos:centos6  
 RUN yum install -y pcre-devel wget net-tools gcc zlib zlib-devel make openssl-devel  
