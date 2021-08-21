@@ -10,4 +10,3 @@ COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo 'Asia/Shanghai' >/etc/timezone
 RUN yum -y install net-tools
-/bin/sh -c apk add --no-cache
