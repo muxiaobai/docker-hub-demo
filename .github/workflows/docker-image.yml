@@ -16,11 +16,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file docker/jdk/Dockerfile --tag docker-hub-demo
-    - name: Login dockerhub
+    - name: Login docker hub
       run: echo "${{secrets.DOCKERHUB_PWD}}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
     - name: Push image
       run: |
-        IAMGE_ID=muxiaobai/docker-hub-demo
-        VERSION=$(echo "${{github.ref}}" | sed -e 's,.*/(.*),l,')
+        IAMGE_ID=${{secrets.DOCKERHUB_USER}}/docker-hub-demo
+        VERSION=jdk-1.8
         docker tag docker-hub-demo $IAMGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
