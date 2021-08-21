@@ -8,4 +8,4 @@ MAINTAINER muxiaobai<zpf12345678910@email.com>
 #ENV CLASSPATH ${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar
 COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
 RUN echo 'Asia/Shanghai' >/etc/timezone
-RUN apk add  net-tools
+RUN apk add --no-cache net-tools curl
