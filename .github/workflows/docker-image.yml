@@ -17,7 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file docker/jdk/Dockerfile --tag docker-hub-demo
     - name: Login dockerhub
-      run: echo "${{sercerts.DOCKERHUB_PWD}}" | docker login -u  --password-stdin
+      run: echo "${{secerts.DOCKERHUB_PWD}}" | docker login -u  --password-stdin
     - name: Push image
       run: |
         IAMGE_ID=muxiaobai/docker-hub-demo
