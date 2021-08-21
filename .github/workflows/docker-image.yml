@@ -15,4 +15,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file docker/jdk/Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file docker/jdk/Dockerfile --tag docker-hub-demo
+    - name: Login dockerhub
+      run: echo "${{sercerts.DOCKERHUB_PWD}}" | docker login -u  --password-stdin
+    - name: Push image
+      run: |
+        IAMGE_ID=muxiaobai/docker-hub-demo
+        VERSION=$(echo "${{github.ref}}" | sed -e 's,.*/(.*),l,')
+        docker tag docker-hub-demo $IAMGE_ID:$VERSION
+        docker push $IMAGE_ID:$VERSION
