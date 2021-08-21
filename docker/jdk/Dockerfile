@@ -1,16 +1,11 @@
-#systemctl  start  docker  
-#mkdir -p /docker/nginx  
-#vim Dockerfile  
-#images of nginx  
-FROM docker.io/centos:centos6  
-MAINTAINER muxiaobai<zpf12345678910@email.com>
 
-RUN yum install -y pcre-devel wget net-tools gcc zlib zlib-devel make openssl-devel  
-RUN useradd -M -s /sbin/nologin nginx  
-ADD http://nginx.org/download/nginx-1.6.2.tar.gz .  
-RUN tar zxvf nginx-1.6.2.tar.gz  
-RUN mkdir -p /usr/local/nginx  
-RUN cd nginx-1.6.2 && ./configure --prefix=/usr/local/nginx --user=nginx --group=nginx --with-http_stub_status_module && make && make install  
-RUN ln -s /usr/local/nginx/sbin/* /usr/local/sbin/  
-expose 80  
-CMD ["nginx"]
+FROM frolvlad/alpine-glibc:alpine-3.8
+MAINTAINER muxiaobai<zpf12345678910@email.com>
+ADD jdk-8u201-linux-x64.tar.gz /usr/local/
+ENV JAVA_HOME /usr/local/jdk1.8.0_201
+ENV PATH  ${PATH}:${JAVA_HOME}/bin
+ENV CLASSPATH ${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar
+COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' >/etc/timezone
+RUN yum -y install net-tools
