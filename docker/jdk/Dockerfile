@@ -9,3 +9,8 @@ MAINTAINER muxiaobai<zpf12345678910@email.com>
 COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
 RUN echo 'Asia/Shanghai' >/etc/timezone
 RUN apk add --no-cache net-tools curl
+RUN sed -i 's~dl-cdn.alpinelinux.org~mirrors.aliyun.com~' /etc/apk/repositories \
+        && apk --update --no-cache add bash \
+        bash-doc \
+        bash-completion \
+        && rm -rf /var/cache/apk/*
