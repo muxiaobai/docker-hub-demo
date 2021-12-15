@@ -50,6 +50,12 @@ RUN tar -zxf /tmp/elasticsearch.tar.gz --strip-components=1
 COPY docker/elasticsearch/config/elasticsearch.yml config/
 COPY docker/elasticsearch/config/log4j2.properties config/log4j2.docker.properties
 
+COPY docker/elasticsearch/plugins/elasticsearch-analysis-ik-7.5.0.tar.gz .
+
+RUN tar -zxf elasticsearch-analysis-ik-7.5.0.tar.gz --strip-components=1
+
+RUN rm -rf elasticsearch-analysis-ik-7.5.0.tar.gz
+
 #  1. Configure the distribution for Docker
 #  2. Create required directory
 #  3. Move the distribution's default logging config aside
@@ -69,24 +75,9 @@ RUN sed -i -e 's/ES_DISTRIBUTION_TYPE=tar/ES_DISTRIBUTION_TYPE=docker/' bin/elas
     chmod 0555 bin/* jdk/bin/* jdk/lib/jspawnhelper modules/x-pack-ml/platform/linux-*/bin/* && \
     chmod 0775 bin config config/jvm.options.d data logs plugins && \
     find config -type f -exec chmod 0664 {} +
+
 ################################################################################
 # Build stage 1 (the actual Elasticsearch image):
-#
-# Copy elasticsearch from stage 0
-# Add pluginer
-################################################################################
-FROM ubuntu:20.04 AS pluginer
-
-RUN mkdir /usr/share/elasticsearch/plugins
-WORKDIR /usr/share/elasticsearch/plugins
-COPY docker/elasticsearch/plugins/elasticsearch-analysis-ik-7.5.0.tar.gz .
-
-RUN tar -zxf elasticsearch-analysis-ik-7.5.0.tar.gz --strip-components=1
-
-RUN rm -rf elasticsearch-analysis-ik-7.5.0.tar.gz
-
-################################################################################
-# Build stage 2 (the actual Elasticsearch image):
 #
 # Copy elasticsearch from stage 0
 # Add entrypoint
@@ -114,10 +105,7 @@ RUN groupadd -g 1000 elasticsearch && \
 ENV ELASTIC_CONTAINER true
 
 WORKDIR /usr/share/elasticsearch
-
 COPY --from=builder --chown=0:0 /usr/share/elasticsearch /usr/share/elasticsearch
-
-COPY --from=pluginer --chown=0:0 /usr/share/elasticsearch/plugins /usr/share/elasticsearch/plugins
 
 COPY --from=builder --chown=0:0 /bin/tini /bin/tini
 
