@@ -18,9 +18,11 @@ jobs:
       run: docker build . --file docker/jdk/Dockerfile --tag docker-hub-demo
     - name: Login docker hub
       run: echo "${{secrets.DOCKERHUB_PWD}}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
+    - name: ' GET Date'
+      run: echo "TAG_DATE= $(TZ=':Asia/Shanghai' date '+%y-%m-%d')" >>$GITHUB_ENV
     - name: Push image
       run: |
-        docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8
-        docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8
+        docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}
+        docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}
         docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
         docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
