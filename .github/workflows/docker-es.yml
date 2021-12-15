@@ -21,5 +21,3 @@ jobs:
       run: |
         docker tag docker-hub-demo-es-7.16.1 ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:docker-hub-demo-es-7.16.1
         docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:docker-hub-demo-es-7.16.1
-        docker tag docker-hub-demo-es-7.16.1 ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
-        docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
