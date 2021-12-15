@@ -50,6 +50,8 @@ COPY docker/elasticsearch/plugins/elasticsearch-analysis-ik-7.5.0.tar.gz plugins
 
 RUN tar -zxf plugins/elasticsearch-analysis-ik-7.5.0.tar.gz --strip-components=1
 
+RUN rm -rf plugins/elasticsearch-analysis-ik-7.5.0.tar.gz
+
 # The distribution includes a `config` directory, no need to create it
 COPY docker/elasticsearch/config/elasticsearch.yml config/
 COPY docker/elasticsearch/config/log4j2.properties config/log4j2.docker.properties
