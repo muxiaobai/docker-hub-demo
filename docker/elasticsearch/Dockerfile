@@ -46,7 +46,7 @@ RUN curl --retry 10 -S -L --output /tmp/elasticsearch.tar.gz https://artifacts-n
 
 RUN tar -zxf /tmp/elasticsearch.tar.gz --strip-components=1
 
-COPY  plugins/elasticsearch-analysis-ik-7.5.0.tar.gz plugins/
+COPY docker/elasticsearch/plugins/elasticsearch-analysis-ik-7.5.0.tar.gz plugins/
 
 RUN tar -zxf plugins/elasticsearch-analysis-ik-7.5.0.tar.gz --strip-components=1
 
