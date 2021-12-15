@@ -51,8 +51,8 @@ COPY docker/elasticsearch/plugins/elasticsearch-analysis-ik-7.5.0.tar.gz plugins
 RUN tar -zxf plugins/elasticsearch-analysis-ik-7.5.0.tar.gz --strip-components=1
 
 # The distribution includes a `config` directory, no need to create it
-COPY config/elasticsearch.yml config/
-COPY config/log4j2.properties config/log4j2.docker.properties
+COPY docker/elasticsearch/config/elasticsearch.yml config/
+COPY docker/elasticsearch/config/log4j2.properties config/log4j2.docker.properties
 
 #  1. Configure the distribution for Docker
 #  2. Create required directory
@@ -111,7 +111,7 @@ COPY --from=builder --chown=0:0 /etc/ssl/certs/java/cacerts /etc/ssl/certs/java/
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 
-COPY bin/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY docker/elasticsearch/bin/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 # 1. Sync the user and group permissions of /etc/passwd
 # 2. Set correct permissions of the entrypoint
