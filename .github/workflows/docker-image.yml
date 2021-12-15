@@ -24,5 +24,5 @@ jobs:
       run: |
         docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}
         docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}
-        docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
-        docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
+ #      docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
+ #      docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
