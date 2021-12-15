@@ -17,6 +17,8 @@ jobs:
       run: docker build . --file docker/elasticsearch/Dockerfile --tag docker-hub-demo-es-7.16.1
     - name: Login docker hub
       run: echo "${{secrets.DOCKERHUB_PWD}}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
+    - name: ' GET Date'
+      run: echo "TAG_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d')" >>$GITHUB_ENV
     - name: Push image
       run: |
         docker tag docker-hub-demo-es-7.16.1 ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:docker-hub-demo-es-7.16.1
