@@ -52,9 +52,9 @@ COPY docker/elasticsearch/config/log4j2.properties config/log4j2.docker.properti
 
 COPY docker/elasticsearch/plugins/elasticsearch-analysis-ik-7.5.0.tar.gz .
 
-RUN tar -zxf elasticsearch-analysis-ik-7.5.0.tar.gz --strip-components=1
+# RUN tar -zxf elasticsearch-analysis-ik-7.5.0.tar.gz --strip-components=1
 
-RUN rm -rf elasticsearch-analysis-ik-7.5.0.tar.gz
+# RUN rm -rf elasticsearch-analysis-ik-7.5.0.tar.gz
 
 #  1. Configure the distribution for Docker
 #  2. Create required directory
