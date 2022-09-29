@@ -12,7 +12,7 @@ RUN mkdir -p /usr/local/nginx
 RUN cd nginx-1.6.2 \
     && ./configure --prefix=/usr/local/nginx --user=nginx --group=nginx  --with-http_stub_status_module \
     --with-http_realip_module --with-http_stub_status_module \
-    --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_ssl_module \
+    --with-http_gzip_static_module --with-pcre  --with-http_ssl_module \
     && make && make install  
 # --with-http_v2_module
 RUN ln -s /usr/local/nginx/sbin/* /usr/local/sbin/  
