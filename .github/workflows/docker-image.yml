@@ -2,9 +2,9 @@ name: Docker Image jdk CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ jdk ]
   pull_request:
-    branches: [ master ]
+    branches: [ jdk ]
 
 jobs:
 
