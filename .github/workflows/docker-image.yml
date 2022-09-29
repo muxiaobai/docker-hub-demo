@@ -2,9 +2,9 @@ name: Docker Image jdk CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ nginx ]
   pull_request:
-    branches: [ master ]
+    branches: [ nginx ]
 
 jobs:
 
@@ -15,14 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file docker/jdk/Dockerfile --tag docker-hub-demo
+      run: docker build . --file docker/nginx/Dockerfile --tag docker-hub-demo
     - name: Login docker hub
       run: echo "${{secrets.DOCKERHUB_PWD}}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
     - name: ' GET Date'
       run: echo "TAG_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d')" >>$GITHUB_ENV
     - name: Push image
       run: |
-        docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}
-        docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}
+        docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:nginx-${{env.TAG_DATE}}
+        docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:nginx-${{env.TAG_DATE}}
  #      docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
  #      docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
