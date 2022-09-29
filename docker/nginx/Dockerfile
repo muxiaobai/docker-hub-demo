@@ -2,8 +2,8 @@
 #mkdir -p /docker/nginx  
 #vim Dockerfile  
 #images of nginx  
-FROM docker.io/centos:centos6  
-RUN yum install -y pcre-devel wget net-tools gcc zlib zlib-devel make openssl-devel  
+FROM debian:bullseye-slim
+RUN apk add --no-cache net-tools curl gcc python pcre-devel wget net-tools gcc zlib zlib-devel make openssl-devel  
 RUN useradd -M -s /sbin/nologin nginx  
 ADD http://nginx.org/download/nginx-1.6.2.tar.gz .  
 RUN tar zxvf nginx-1.6.2.tar.gz  
