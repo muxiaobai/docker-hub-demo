@@ -2,7 +2,8 @@
 #mkdir -p /docker/nginx  
 #vim Dockerfile  
 #images of nginx  
-FROM alpine:3.14
+#FROM alpine:3.14
+FROM debian:bullseye-slim
 MAINTAINER muxiaobai<zpf12345678910@email.com>
 #RUN useradd -M -s /sbin/nologin nginx  
 ADD http://nginx.org/download/nginx-1.6.2.tar.gz .  
