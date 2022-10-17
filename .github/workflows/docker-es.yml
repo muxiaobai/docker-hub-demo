@@ -3,9 +3,9 @@ name: elasticsearch Docker
 
 on:
   push:
-    branches: [ master ]
+    branches: [ es ]
   pull_request:
-    branches: [ master ]
+    branches: [ es ]
 
 jobs:
 
