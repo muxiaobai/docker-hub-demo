@@ -1,5 +1,5 @@
 
-name: elasticsearch Docker
+name: base images Docker
 
 on:
   push:
