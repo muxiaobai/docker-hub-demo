@@ -22,7 +22,7 @@ jobs:
       run: echo "TAG_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d')" >>$GITHUB_ENV
     - name: Push image
       run: |
-        docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}
+        docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}-arm
         docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:jdk-1.8-${{env.TAG_DATE}}-arm
  #      docker tag docker-hub-demo ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
  #      docker push ${{secrets.DOCKERHUB_USER}}/docker-hub-demo:latest
